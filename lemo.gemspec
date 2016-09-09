@@ -9,7 +9,7 @@ Gem::Specification.new do |spec|
   spec.authors       = ["John Anderson"]
   spec.email         = ["panic@semiosix.com"]
 
-  spec.summary       = %q{fast-ish Memoize that handles nils and singletons }
+  spec.summary       = %q{fast-ish Memoize that handles nils and singletons}
   spec.description   = spec.summary
   spec.homepage      = "http://github.com/djellemah/lemo"
   spec.license       = "MIT"

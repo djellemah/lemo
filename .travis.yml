@@ -1,6 +1,9 @@
 language: ruby
 rvm:
-  - 2.3.1
-  - jruby-9.1.2.0
+  - 2.1
+  - 2.2
+  - 2.3.1 # 2.3 doesn't work 09-Sep-2016
+  - jruby-9.0
+  - jruby-9.1.2.0 # 9.1 doesn't work 09-Sep-2016
 before_install: gem install bundler -v 1.10.6
 script: bundle exec rspec

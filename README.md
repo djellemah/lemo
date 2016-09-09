@@ -1,4 +1,4 @@
-# Lemo
+# Lemo [![Gem Version](https://badge.fury.io/rb/lemo.png)](http://badge.fury.io/rb/lemo) [![Build Status](https://travis-ci.org/djellemah/lemo.png?branch=master)](https://travis-ci.org/djellemah/lemo)
 
 Yet another memoize gem. Because it does some things that are important to me.
 
