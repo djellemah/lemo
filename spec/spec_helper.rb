@@ -36,6 +36,8 @@ shared_examples_for "Lemonised" do |*methods|
     describe meth do
       it "keeps a value for #{meth}" do
         fst = subject.send(meth)
+
+        # Yes, twice
         subject.send(meth).should == fst
         subject.send(meth).should == fst
       end
@@ -47,7 +49,7 @@ shared_examples_for "Lemonised" do |*methods|
       end
 
       it 'handles clear of nonexistent memo' do
-        fst = subject.send(meth)
+        subject.send(meth)
         nonsense = subject._clear_memos :nonsense
         nonsense.should be_nil
       end

@@ -38,6 +38,7 @@ module Lemo
         # runtime. Use class_eval to define an instance method, cos self is the
         # class (or singleton class) right now
         class_eval <<-RUBY, __FILE__, __LINE__
+          undef #{meth} if $VERBOSE # only to avoid warnings during -w
           def #{meth}
             #{ivar} ||= _memoed_methods[:#{meth}].bind(self).call
           end

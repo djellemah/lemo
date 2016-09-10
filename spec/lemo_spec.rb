@@ -2,14 +2,14 @@ require_relative 'spec_helper'
 require_relative '../lib/lemo.rb'
 
 describe Lemo do
-  class Holder
+  class self::Holder
     include Lemo::Memo
-    memo def value; rand -10000..10000 end
-    memo def other; rand -10000..10000 end
-    def plain; rand -10000..10000 end
+    memo def value; rand( -10000 .. 10000 ) end
+    memo def other; rand( -10000 .. 10000 ) end
+    def plain; rand( -10000 .. 10000 ) end
   end
 
-  subject{ Holder.new }
+  subject{ self.class::Holder.new }
 
   it_behaves_like 'Lemonised', :value, :other
 
@@ -41,7 +41,7 @@ describe Lemo do
 
   describe 'extended singleton' do
     subject do
-      inst = Holder.new
+      inst = self.class::Holder.new
 
       def inst.sother; rand end
       inst.singleton_class.memo :sother
@@ -66,7 +66,7 @@ describe Lemo do
   describe 'disallows methods' do
     it 'with arguments' do
       illegal_memo = lambda do
-        class Thing
+        Class.new do
           include Lemo::Memo
 
           memo def thing( *args )
@@ -80,7 +80,7 @@ describe Lemo do
 
     it 'with explicit blocks' do
       illegal_memo = lambda do
-        class Thing
+        Class.new do
           include Lemo::Memo
 
           memo def thing( &blk )
@@ -94,7 +94,7 @@ describe Lemo do
 
     it 'with keywords' do
       illegal_memo = lambda do
-        class Thing
+        Class.new do
           include Lemo::Memo
 
           memo def thing( first:, opt: nil )

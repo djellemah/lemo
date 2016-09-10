@@ -28,6 +28,7 @@ module Lemo
         memoed_methods[meth] = unbound_previous_method
         ivar = ivar_from meth
 
+        remove_method meth if $VERBOSE
         define_method meth do
           # This gets executed on every call to meth, so make it fast.
           if instance_variable_defined? ivar

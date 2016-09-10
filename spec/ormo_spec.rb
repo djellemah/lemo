@@ -2,14 +2,14 @@ require_relative 'spec_helper'
 require_relative '../lib/lemo/ormo.rb'
 
 describe Lemo::Ormo do
-  class Holder
+  class self::Holder
     include Lemo::Ormo
-    memo def value; rand -10000..10000 end
-    memo def other; rand -10000..10000 end
-    def plain; rand -10000..10000 end
+    memo def value; rand( -10000..10000 ) end
+    memo def other; rand( -10000..10000 ) end
+    def plain; rand( -10000..10000 ) end
   end
 
-  subject{ Holder.new }
+  subject{ self.class::Holder.new }
 
   it_behaves_like 'Lemonised', :value, :other
 
@@ -40,7 +40,7 @@ describe Lemo::Ormo do
 
   describe 'extended singleton' do
     subject do
-      inst = Holder.new
+      inst = self.class::Holder.new
 
       def inst.sother; rand end
       inst.singleton_class.memo :sother
@@ -65,7 +65,7 @@ describe Lemo::Ormo do
   describe 'disallows methods' do
     it 'with arguments' do
       illegal_memo = lambda do
-        class Thing
+        Class.new do
           include Lemo::Ormo
 
           memo def thing( *args )
@@ -79,7 +79,7 @@ describe Lemo::Ormo do
 
     it 'with explicit blocks' do
       illegal_memo = lambda do
-        class Thing
+        Class.new do
           include Lemo::Ormo
 
           memo def thing( &blk )
@@ -93,7 +93,7 @@ describe Lemo::Ormo do
 
     it 'with keywords' do
       illegal_memo = lambda do
-        class Thing
+        Class.new do
           include Lemo::Ormo
 
           memo def thing( first:, opt: nil )
