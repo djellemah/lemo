@@ -1,4 +1,4 @@
-# Copyright John Anderson 2015-2016
+# Copyright John Anderson 2015-2017
 
 require_relative 'memoed_methods'
 
@@ -28,7 +28,7 @@ module Lemo
         memoed_methods[meth] = unbound_previous_method
         ivar = ivar_from meth
 
-        remove_method meth if $VERBOSE
+        remove_method meth if $VERBOSE # make warnings shut up
         define_method meth do
           # This gets executed on every call to meth, so make it fast.
           if instance_variable_defined? ivar

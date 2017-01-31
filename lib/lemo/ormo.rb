@@ -1,4 +1,4 @@
-# Copyright John Anderson 2015-2016
+# Copyright John Anderson 2015-2017
 
 require_relative 'memoed_methods'
 
@@ -32,6 +32,7 @@ module Lemo
 
         # keep this for initial calculation, and recalculation
         memoed_methods[meth] = unbound_previous_method
+        define_method :"_memo_#{meth}_previous", unbound_previous_method
         ivar = ivar_from meth
 
         # Define the class using instance variable @ syntax, for fastest
@@ -40,7 +41,7 @@ module Lemo
         class_eval <<-RUBY, __FILE__, __LINE__
           undef #{meth} if $VERBOSE # only to avoid warnings during -w
           def #{meth}
-            #{ivar} ||= _memoed_methods[:#{meth}].bind(self).call
+            #{ivar} ||= _memo_#{meth}_previous
           end
         RUBY
 
